@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Elex Media</title>
+        <link rel="stylesheet" href="app.css">
+    </head>
+
+    <div class='heading'>
+        <h1>Elex Media</h1>
+    </div>
+    <form id="emp_form">
+        <label for="emp_id">Employee ID:</label>
+        <input type="text" id="employeeid" name="employeeid" pattern="^E[A-Za-z0-9]{3,}$" title="Employee ID must start with 'E', contain only letters and numbers, and be at least 4 characters long" required>
+        <br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+        <br>
+        <label for="designation">Designation:</label>
+        <select id="designation" name="designation" required>
+            <option value="">Select designation</option>
+            <option value="topmanagement">Top Management</option>
+            <option value="middlemanagement">Middle Managementr</option>
+            <option value="lowermanagement">Lower Management</option>
+            <option value="worker">Worker</option>
+        </select>
+        <br>
+        <label for="loan_amount">Loan Amount:</label>
+        <input type="number" id="loan_amount" name="loan_amount" required>
+        <br>
+        <label for="date_of_loan">Date of Loan:</label>
+        <input type="date" id="date_of_loan" name="date_of_loan" required>
+        <br>
+        <label for="interest_rate">Interest:</label>
+        <input type="number" id="interest_rate" name="interest_rate" min="0" step="0.01"required>
+        <br>
+        <label for="maturity_date">Maturity Date:</label>
+        <input type="date" id="maturity_date" name="maturity_date" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+       document.getElementById('emp_form').addEventListener('submit', function(event) { 
+        event.preventDefault(); // prevent the form from submitting 
+        var designation = document.getElementById('designation').value;
+         var loan_amount = parseFloat(document.getElementById('loan_amount').value); 
+         var interest_rate = parseFloat(document.getElementById('interest_rate').value); 
+         var interest_payable = loan_amount * (interest_rate / 100); // calculation based on designation 
+         var additional_amount = 0; switch (designation) { case 'topmanagement': additional_amount = loan_amount * 0.05;
+          break; 
+          case 'middlemanagement': additional_amount = loan_amount * 0.03;
+           break; 
+          case 'lowermanagement': additional_amount = loan_amount * 0.02; 
+           break; 
+          case 'worker': additional_amount = loan_amount * 0.01; 
+           break; } var total_loan_amount = loan_amount + additional_amount; var total_interest_payable = interest_payable + additional_amount; // display the results 
+           alert('Total Loan Amount: $' + total_loan_amount.toFixed(2) + '\nTotal Interest Payable: $' + total_interest_payable.toFixed(2)); 
+           });
+ </script> 
+</html>
